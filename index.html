@@ -14,7 +14,15 @@
 </body>
     <div class="contenedor">
         <div class="encabezado">
-            
+            <script>
+                for(var i = 1; i<=15; i++){
+                    const contBtn = document.createElement("div")
+                    contBtn.className = "btn btn-secondary";
+                    contBtn.id = "btn"+i;
+                    contBtn.textContent = "Punto "+i;
+                    document.querySelector(".encabezado").append(contBtn)
+                }
+            </script>
         </div>
     </div>
 </html>
