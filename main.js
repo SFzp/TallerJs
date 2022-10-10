@@ -1,9 +1,9 @@
+const contEncabezado = document.querySelector(".encabezado")
+const contBtn = document.createElement("div")
+const contInput = document.createElement("input")
+const contTitle = document.createElement("H2")
 
 document.getElementById("btn1").onclick = function(){
-    const contInput = document.createElement("input")
-    const contEncabezado = document.querySelector(".encabezado")
-    const contBtn = document.createElement("div")
-    const contTitle = document.createElement("H2")
     const contTbl = document.createElement('table')
     const contTr = document.createElement('tr')
     const contThPlaca = document.createElement('th')
@@ -95,22 +95,132 @@ function colorCalcomania(caracter){
     switch(caracter){
         case "1": case "2":
             return "Amarilla"
-            break;
 
         case "3": case "4":
             return "Rosa"
-            break;
 
         case "5": case "6":
             return "Roja"
-            break;
 
         case "7": case "8":
             return "Verde"
-            break;
 
         case "9": case "0":
             return "Azul"
-            break;
     }    
+}
+
+document.getElementById("btn2").onclick = function(){
+    var contenedor
+    document.getElementsByTagName("body")[0].style.textAlign = "start"
+    contEncabezado.style.padding = "200px"
+    var cont=0,total,edad=[],categoria=0,categoria2=0,categoria3=0,animal
+    
+    for(var i = 0; i<15; i++){
+        document.getElementsByClassName("btn")[i].style.display = "none"
+    }
+
+    for(var i = 0;i <3; i++){
+        contenedor = document.createElement("div")
+
+        const contRadioBtn = document.createElement("input")
+
+        const contLabel = document.createElement("label")
+
+        contRadioBtn.setAttribute("type", "radio")  
+        
+        contenedor.className = "form-check"
+
+        contRadioBtn.className = "radio"
+        contRadioBtn.className = "label"
+        contLabel.className = "radio form-check-label"
+        contRadioBtn.id = "radio"+i
+        contLabel.id = "label"+i
+        contRadioBtn.required = true
+        contRadioBtn.name = "animal"
+
+        contenedor.append(contRadioBtn)
+        contenedor.append(contLabel)
+        contEncabezado.append(contenedor)
+    }
+
+    document.getElementById("label0").textContent = "Elefante"
+    document.getElementById("radio0").value = "Elefante"
+    document.getElementById("label1").textContent = "Jirafa"
+    document.getElementById("radio1").value = "Jirafa"
+    document.getElementById("label2").textContent = "Chimpancé"
+    document.getElementById("radio2").value = "Chimpancé"
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+    contEncabezado.appendChild(contBtn)
+
+    document.getElementById("btnEnviar").onclick = function(){
+        let animal = document.querySelector('input[name="animal"]:checked').value
+        const contParrafo = document.createElement("p")
+        contEncabezado.style.padding = "0"
+        contBtn.style.display = "block"
+        switch(animal){
+            case "Elefante":
+                total = 20
+                break
+            
+            case "Jirafa":
+                total = 15;
+                break
+
+            case "Chimpancé":
+                total = 40
+                break
+        }
+
+        for(var i = 0;i <3; i++){
+            document.getElementsByClassName("form-check")[i].style.display = "none"
+        }
+        
+        if(cont <= total){
+            contTitle.textContent = "¿Que edad tiene el/la "+animal+" "+((cont < total) ? cont+1 : cont)+"?"
+            contInput.className = "input"
+            contInput.id = "input"
+            contInput.required = "true"
+            edad[cont] = [contInput.value]
+            cont++
+            contenedor.append(contInput)
+            if(cont-1 == total){
+                edad.shift()
+                for(var i = 0; i < edad.length; i++){
+                    if(edad[i] >= 0 && edad[i] <=1){
+                       categoria += 1
+                    }
+                    else if(edad[i] < 3){
+                        categoria2 += 1
+                    }
+                    else{
+                        categoria3 += 1
+                    }
+                }
+
+                contParrafo.innerHTML = "El porcentaje de edades de: "+animal+
+                "<br>"+"De 0 a 1 año: "+((categoria/total)*100)+"%"+
+                "<br>"+"De mas de 1 año y menos de 3: "+((categoria2/total)*100)+"%"+
+                "<br>"+"De 3 o mas años: "+((categoria3/total)*100)+"%"
+                contEncabezado.append(contParrafo)
+                contInput.style.display = "none"
+                contTitle.style.display = "none"
+                contBtn.textContent = "Volver"
+                contBtn.onclick = function(){
+                    location.reload()
+                }
+            }
+        }      
+
+        contInput.style.width = "100%"
+    }
+    contenedor = document.createElement("div")
+    contTitle.className = "title"
+
+    contenedor.append(contTitle)
+    contEncabezado.append(contenedor)
+    contEncabezado.appendChild(contBtn)
 }
