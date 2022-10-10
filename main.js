@@ -8,9 +8,8 @@ document.getElementById("btn1").onclick = function(){
     const contTr = document.createElement('tr')
     const contThPlaca = document.createElement('th')
     const contThColor = document.createElement('th')
-    for(var i = 0; i<15; i++){
-        document.getElementsByClassName("btn")[i].style.display = "none"
-    }
+
+    quitarBotones()
     
     contTitle.textContent = "Ingrese la cantidad de autos a evaluar"
 
@@ -116,9 +115,7 @@ document.getElementById("btn2").onclick = function(){
     contEncabezado.style.padding = "200px"
     var cont=0,total,edad=[],categoria=0,categoria2=0,categoria3=0,animal
     
-    for(var i = 0; i<15; i++){
-        document.getElementsByClassName("btn")[i].style.display = "none"
-    }
+    quitarBotones()
 
     for(var i = 0;i <3; i++){
         contenedor = document.createElement("div")
@@ -223,4 +220,50 @@ document.getElementById("btn2").onclick = function(){
     contenedor.append(contTitle)
     contEncabezado.append(contenedor)
     contEncabezado.appendChild(contBtn)
+}
+
+document.getElementById("btn3").onclick = function(){
+    var horasTrabajadas, total, horasExtra
+
+    const contParrafo = document.createElement("p")
+    contTitle.textContent = "Ingrese el número de horas trabajadas"
+    contInput.className = "horasTrabajadas"
+    contInput.id = "horasTrabajadas"
+    contInput.required = "true"
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+
+    quitarBotones()
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.appendChild(contBtn)
+
+    document.getElementById("btnEnviar").onclick = function(){
+        horasTrabajadas = parseFloat(contInput.value)
+        contEncabezado.append(contParrafo)
+        if(horasTrabajadas <= 40){
+            total = horasTrabajadas*20
+            contParrafo.innerHTML = "Su sueldo es de $"+total
+        }
+        else{
+            horasExtra = horasTrabajadas-40
+            total=((horasExtra*25)+(40*20))
+            contParrafo.innerHTML = "Su sueldo es de $"+total
+        }
+        contTitle.style.display = "none"
+        contInput.style.display = "none"
+        contBtn.textContent = "Volver"
+        contBtn.onclick = function(){
+            location.reload()
+        }
+    }
+
+}
+
+function quitarBotones(){
+    for(var i = 0; i<15; i++){
+        document.getElementsByClassName("btn")[i].style.display = "none"
+    }
 }
