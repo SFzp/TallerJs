@@ -366,6 +366,79 @@ document.getElementById("btn5").onclick = function(){
     
 }
 
+document.getElementById("btn6").onclick = function(){
+    var peso_anterior = [], suma = [], contPersonas = 0, contPeso = 0, DifPeso = []
+    const contBtnNPeso = document.createElement("div")
+    const contParrafo = document.createElement("p")
+    contTitle.textContent = "Ingrese el peso anterior de la persona #"+1
+    contInput.className = "Peso"
+    contInput.id = "Peso"
+    contInput.required = "true"
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+
+    contBtnNPeso.className = "btn btn-success"
+    contBtnNPeso.id = "btnNPeso"
+    contBtnNPeso.textContent = "Enviar"
+    contBtnNPeso.style.display = "none"
+
+    quitarBotones()
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contBtnNPeso)
+    contEncabezado.appendChild(contBtn)
+
+    document.getElementById("btnEnviar").onclick = function(){
+        if(contPersonas < 5){
+            console.log("a")
+            contPeso = 0
+            contTitle.textContent = "Ingrese el peso anterior de la persona #"+(contPersonas+1)
+            peso_anterior[contPersonas] = parseInt(contInput.value)
+            contPersonas++
+            contBtn.style.display = "none"
+            contTitle.textContent = "Ingrese el peso de la bácula #"+(contPeso+1)
+            contBtnNPeso.style.display = "inline"
+        }
+    }
+
+    contBtnNPeso.onclick = function(){
+        if(contPeso < 10){
+            contTitle.textContent = "Ingrese el peso de la bácula #"+((contPeso < 9) ? contPeso+2 : contPeso+1)
+            suma[contPersonas-1] = (contPeso <= 0 ) ? parseInt(contInput.value) : suma[contPersonas-1] + parseInt(contInput.value)
+            DifPeso[contPersonas-1] = (contPeso <= 0 ) ? (parseInt(contInput.value) - (peso_anterior[contPersonas-1])) : DifPeso[contPersonas-1] 
+                                        + (parseInt(contInput.value) - (peso_anterior[contPersonas-1]))
+            contPeso++
+            console.log(DifPeso)
+            if(contPeso > 9){
+                contBtnNPeso.style.display = "none"
+                contBtn.style.display = "inline"
+                if(contPersonas < 5){
+                    contTitle.textContent = "Ingrese el peso anterior de la persona #"+ (contPersonas+1)
+                }else{
+                    for(var i = 0; i < contPersonas;i++){
+                        if((suma[i]/10) == peso_anterior[i]){
+                            contParrafo.innerHTML += "La persona "+(i+1)+ " mantiene su mismo peso de "+peso_anterior[i]+"kg<br>"
+                        }
+                        else if((suma[i]/10) > peso_anterior[i]){
+                            contParrafo.innerHTML += "La persona "+(i+1)+ " subio "+ (DifPeso[i])+"kg<br>"
+                        }
+                        else{
+                            contParrafo.innerHTML += "La persona "+(i+1)+ " bajo "+ (DifPeso[i])+"kg<br>"
+                        }
+                    }
+                    contEncabezado.append(contParrafo)
+                    console.log(DifPeso)
+                    final()
+                }
+                
+            }
+        }
+    }
+
+}
 
 function quitarBotones(){
     for(var i = 0; i<15; i++){
