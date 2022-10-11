@@ -316,6 +316,56 @@ document.getElementById("btn4").onclick = function(){
 
 }
 
+document.getElementById("btn5").onclick = function(){
+    var num = [], cont = 0
+    const contBtnNumMenor = document.createElement("div")
+    contTitle.textContent = "Ingrese un numero - #"+1
+    contInput.className = "Numero"
+    contInput.id = "Numero"
+    contInput.required = "true"
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+
+    contBtnNumMenor.className = "btn btn-primary"
+    contBtnNumMenor.id = "btnNumMenor"
+    contBtnNumMenor.textContent = "Encontrar el menor numero"
+
+    quitarBotones()
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contBtn)
+    contEncabezado.appendChild(contBtnNumMenor)
+
+    contBtnNumMenor.style.display = "block"
+
+    const contParrafo = document.createElement("p")
+
+    document.getElementById("btnEnviar").onclick = function(){
+        contTitle.textContent = "Ingrese un numero - #"+(cont+2)
+        num[cont] = parseInt(contInput.value)
+        cont++
+        for (var k = 1; k < cont; k++) {
+            for (var i = 0; i < (cont - k); i++) {
+                if (num[i] > num[i + 1]) {
+                    let aux = num[i];
+                    num[i] = num[i + 1];
+                    num[i + 1] = aux;
+                }
+            }
+        }
+    }
+    document.getElementById("btnNumMenor").onclick = function(){
+        contBtnNumMenor.style.display = "none"
+        final()
+        contParrafo.innerHTML = "El menor numero es: "+num[0]
+        contEncabezado.append(contParrafo)
+    }
+    
+}
+
 
 function quitarBotones(){
     for(var i = 0; i<15; i++){
