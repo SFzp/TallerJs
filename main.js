@@ -440,6 +440,46 @@ document.getElementById("btn6").onclick = function(){
 
 }
 
+document.getElementById("btn7").onclick = function(){
+    var contArticulos = 0, precioArticulo, total = 0
+    const contBtnCal = document.createElement("div")
+    const contParrafo = document.createElement("p")
+    contTitle.textContent = "Ingrese el articulo #"+1
+    contInput.className = "Articulo"
+    contInput.id = "Articulo"
+    contInput.required = "true"
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+
+    contBtnCal.className = "btn btn-primary"
+    contBtnCal.id = "btnCalcular"
+    contBtnCal.textContent = "Calcular"
+    contBtnCal.style.display = "block"
+
+    quitarBotones()
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contBtn)
+    contEncabezado.appendChild(contBtnCal)
+
+    document.getElementById("btnEnviar").onclick = function(){        
+        contTitle.textContent = "Ingrese el articulo #"+(contArticulos+2)
+        contArticulos++
+        precioArticulo = parseFloat(contInput.value)
+        total += precioArticulo
+
+        contBtnCal.onclick = function(){
+            contParrafo.innerHTML = "El valor total de los articulos es: $"+total
+            contBtnCal.style.display = "none"
+            final()
+            contEncabezado.append(contParrafo)
+        }
+    }
+}
+
 function quitarBotones(){
     for(var i = 0; i<15; i++){
         document.getElementsByClassName("btn")[i].style.display = "none"
