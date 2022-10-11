@@ -565,6 +565,59 @@ document.getElementById("btn8").onclick = function(){
     }
 }
 
+document.getElementById("btn9").onclick = function(){
+    var cont = 0, ventas, comision
+    const contParrafo = document.createElement("p")
+    contTitle.textContent = "Ingrese cuando vendio el vendedor #"+1
+    contInput.className = "Vendio"
+    contInput.id = "Vendio"
+    contInput.required = "true"
+
+    quitarBotones()
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contBtn)
+
+    document.getElementById("btnEnviar").onclick = function(){  
+        if(cont < 100){
+            cont++
+            contTitle.textContent = "Ingrese cuando vendio el vendedor #"+(cont+1)
+            ventas = parseFloat(contInput.value)
+            if(ventas <= 20000000){
+                comision = ventas*0.1
+            }
+
+            if(ventas > 20000000 && ventas < 40000000){
+                comision = ventas*0.15
+            }
+
+            if(ventas >= 40000000 && ventas < 80000000){
+                comision = ventas*0.2
+            }
+
+            if(ventas >= 80000000 && ventas < 160000000){
+                comision = ventas*0.25
+            }
+
+            if(ventas >= 160000000){
+                comision = ventas*0.3
+            }
+            contParrafo.innerHTML = "El total vendido del trabajador "+(cont)+" es: $"+ventas+"<br>"+
+                                    "Y la comision del trabajador es: $"+comision
+        }
+        else{
+            contParrafo.innerHTML = "Ya ha revisado los 100 trabajadores"
+            final()
+        }
+        contEncabezado.append(contParrafo)
+    }
+}
+
 function quitarBotones(){
     for(var i = 0; i<15; i++){
         document.getElementsByClassName("btn")[i].style.display = "none"
