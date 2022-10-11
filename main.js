@@ -203,12 +203,7 @@ document.getElementById("btn2").onclick = function(){
                 "<br>"+"De mas de 1 año y menos de 3: "+((categoria2/total)*100)+"%"+
                 "<br>"+"De 3 o mas años: "+((categoria3/total)*100)+"%"
                 contEncabezado.append(contParrafo)
-                contInput.style.display = "none"
-                contTitle.style.display = "none"
-                contBtn.textContent = "Volver"
-                contBtn.onclick = function(){
-                    location.reload()
-                }
+                final()
             }
         }      
 
@@ -252,18 +247,87 @@ document.getElementById("btn3").onclick = function(){
             total=((horasExtra*25)+(40*20))
             contParrafo.innerHTML = "Su sueldo es de $"+total
         }
-        contTitle.style.display = "none"
-        contInput.style.display = "none"
-        contBtn.textContent = "Volver"
-        contBtn.onclick = function(){
-            location.reload()
-        }
+        final()
     }
 
 }
 
+document.getElementById("btn4").onclick = function(){
+    var hombres = [], mujeres = [], cont = 0
+    const contInputM = document.createElement("input")
+    const contBtnCal = document.createElement("div")
+    contTitle.textContent = "Ingrese la edad del hombre y la mujer 1"
+    contInput.className = "NHombres"
+    contInput.id = "NHombres"
+    contInput.required = "true"
+    contInput.placeholder ="Hombre"
+
+    contInputM.className = "NMujeres"
+    contInputM.id = "NMujeres"
+    contInputM.required = "true"
+    contInputM.placeholder ="Mujer"
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+
+    contBtnCal.className = "btn btn-primary"
+    contBtnCal.id = "btnCalcular"
+    contBtnCal.textContent = "Calcular"
+
+    contBtnCal.style.display = "block"
+
+    quitarBotones()
+    
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contInputM)
+    contEncabezado.append(contBtn)
+    contEncabezado.appendChild(contBtnCal)
+
+    document.getElementById("btnEnviar").onclick = function(){
+        contTitle.textContent = "Ingrese la edad del hombre y la mujer "+ (cont+2)
+        hombres[cont] = [parseInt(contInput.value)]
+
+        mujeres[cont] = [parseInt(contInputM.value)]
+
+        cont++
+    }
+
+    const contParrafo = document.createElement("p")
+    document.getElementById("btnCalcular").onclick = function(){
+        var edad_mujeres = 0, edad_hombres = 0, promedio_general = 0
+        for(var i = 0; i < cont;i++){
+            edad_mujeres += parseInt(mujeres[i])
+            edad_hombres += parseInt(hombres[i])
+            promedio_general = parseInt(edad_hombres + edad_mujeres)
+        }        
+
+        contParrafo.innerHTML = "El promedio de mujeres es: " + (edad_mujeres/cont)
+        +"<br>El promedio de hombres es: " + (edad_hombres/cont)
+        +"<br>El promedio general es: " + (promedio_general/(cont*2))
+        console.log((cont*2))
+        contEncabezado.append(contParrafo)
+
+        contInputM.style.display = "none"
+        contBtnCal.style.display = "none"
+        final()
+    }
+
+}
+
+
 function quitarBotones(){
     for(var i = 0; i<15; i++){
         document.getElementsByClassName("btn")[i].style.display = "none"
+    }
+}
+
+function final(){
+    contTitle.style.display = "none"
+    contInput.style.display = "none"
+    contBtn.textContent = "Volver"
+    contBtn.onclick = function(){
+        location.reload()
     }
 }
