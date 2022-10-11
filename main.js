@@ -463,7 +463,7 @@ document.getElementById("btn7").onclick = function(){
     contEncabezado.append(contTitle)
     contEncabezado.append(contInput)
     contEncabezado.append(contBtn)
-    contEncabezado.appendChild(contBtnCal)
+    contEncabezado.append(contBtnCal)
 
     document.getElementById("btnEnviar").onclick = function(){        
         contTitle.textContent = "Ingrese el articulo #"+(contArticulos+2)
@@ -477,6 +477,91 @@ document.getElementById("btn7").onclick = function(){
             final()
             contEncabezado.append(contParrafo)
         }
+    }
+}
+
+document.getElementById("btn8").onclick = function(){
+    const contBtnCal = document.createElement("div")
+    const contParrafo = document.createElement("p")
+    const contInputPF = document.createElement("input")
+    var descuento, descuentoCategoria1 = 0, descuentoCategoria2 = 0, descuentoCategoria3 = 0,
+    descuentoCategoria4 = 0, descuentoCategoria5 = 0, edad = [], precio = [], cont = 0
+
+    contTitle.textContent = "Ingrese los datos #"+1
+    contInput.className = "Articulo"
+    contInput.id = "Articulo"
+    contInput.required = "true"
+    contInput.placeholder = "Edad"
+
+    contInputPF.className = "precioFijo"
+    contInputPF.id = "precioFijo"
+    contInputPF.required = "true"
+    contInputPF.placeholder ="Precio fijo"
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+
+    contBtnCal.className = "btn btn-primary"
+    contBtnCal.id = "btnCalcular"
+    contBtnCal.textContent = "Calcular"
+    contBtnCal.style.display = "block"
+
+    quitarBotones()
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contInputPF)
+    contEncabezado.append(contBtn)
+    contEncabezado.append(contBtnCal)
+
+    document.getElementById("btnEnviar").onclick = function(){  
+        if(contInput.value >= 5){
+            edad[cont] = contInput.value
+            precio[cont] = contInputPF.value
+            cont++
+            contTitle.textContent = "Ingrese los datos #"+(cont+1)
+        }else{
+            alert("No puede entrar al teatro")
+        }
+    }
+
+    contBtnCal.onclick = function(){
+        for(var i = 0; i< edad.length; i++){
+            if(edad[i] >= 5 && edad[i] < 15){
+                descuento = precio[i]*0.35
+                descuentoCategoria1 += descuento
+                contParrafo.innerHTML += "Por la categoria 1 deja de recibir $"+descuentoCategoria1+"<br>"
+            }
+        
+            if(edad[i] >= 15 && edad[i] < 20){
+                descuento = precio[i]*0.25
+                descuentoCategoria2 += descuento
+                contParrafo.innerHTML += "Por la categoria 2 deja de recibir $"+descuentoCategoria2+"<br>"
+            }
+        
+            if(edad[i] >= 20 && edad[i] < 46){
+                descuento = precio[i]*0.1
+                descuentoCategoria3 += descuento
+                contParrafo.innerHTML += "Por la categoria 3 deja de recibir $"+descuentoCategoria3+"<br>"
+            }
+        
+            if(edad[i] >= 46 && edad[i] <66){
+                descuento = precio[i]*0.25
+                descuentoCategoria4 += descuento
+                contParrafo.innerHTML += "Por la categoria 4 deja de recibir $"+descuentoCategoria4+"<br>"
+            }
+        
+            if(edad[i] >=66){
+                descuento = precio[i]*0.35
+                descuentoCategoria5 += descuento
+                contParrafo.innerHTML += "Por la categoria 5 deja de recibir $"+descuentoCategoria5+"<br>"
+            }
+        }
+        contBtnCal.style.display = "none"
+        contInputPF.style.display = "none"
+        final()
+        contEncabezado.append(contParrafo)
     }
 }
 
