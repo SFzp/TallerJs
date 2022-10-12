@@ -488,8 +488,8 @@ document.getElementById("btn8").onclick = function(){
     descuentoCategoria4 = 0, descuentoCategoria5 = 0, edad = [], precio = [], cont = 0
 
     contTitle.textContent = "Ingrese los datos #"+1
-    contInput.className = "Articulo"
-    contInput.id = "Articulo"
+    contInput.className = "Edad"
+    contInput.id = "Edad"
     contInput.required = "true"
     contInput.placeholder = "Edad"
 
@@ -616,6 +616,77 @@ document.getElementById("btn9").onclick = function(){
         }
         contEncabezado.append(contParrafo)
     }
+}
+
+document.getElementById("btn10").onclick = function(){
+    const contParrafo = document.createElement("p")
+    var candidato1 = 0, candidato2 = 0, candidato3 = 0, cont = 0
+    contTitle.textContent = "Presione el boton para iniciar el conteo de votos"
+
+    quitarBotones()
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnIniciar"
+    contBtn.textContent = "Iniciar"
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contBtn)
+
+    contBtn.onclick = function(){
+        while(cont < 50000){
+            let random = Math.floor(Math.random() * (4 - 1) + 1)
+            switch(random){
+                case 1:
+                    candidato1++
+                    break
+                
+                case 2:
+                    candidato2++
+                    break
+                
+                case 3:
+                    candidato3++
+                
+            }
+            cont++
+        }
+        
+        contParrafo.innerHTML = "El candidato 1 tiene un total de votos de: "+candidato1+"<br>"
+        contParrafo.innerHTML += "El candidato 2 tiene un total de votos de: "+candidato2+"<br>"
+        contParrafo.innerHTML += "El candidato 3 tiene un total de votos de: "+candidato3+"<br>"
+    
+        if(candidato1 > candidato2){
+            if(candidato1 > candidato3){
+                contParrafo.innerHTML += "El candidatos 1 tiene mas votos"
+            }
+            else{
+                contParrafo.innerHTML += "El candidatos 3 tiene mas votos"
+            }
+        }
+        else if(candidato2 > candidato3){
+            contParrafo.innerHTML += "El candidatos 2 tiene mas votos"
+        }
+        else{
+            contParrafo.innerHTML += "El candidatos 3 tiene mas votos"
+        }
+    
+        if(candidato1 == candidato2 && candidato1 == candidato3 && candidato2 == candidato3){
+            contParrafo.innerHTML += "los 3 candidatos tienen el mismo numero de votos"
+        }
+        else if(candidato1 == candidato2 && candidato1 == candidato3 && candidato2 > candidato3){
+            contParrafo.innerHTML += "los candidatos 1 y 2 tienen el mismo numero de votos"
+        }
+        else if(candidato1 == candidato3 && candidato2 > candidato3){
+            contParrafo.innerHTML += "los candidatos 1 y 3 tienen el mismo numero de votos"
+        }
+        else if(candidato2 == candidato3 && candidato2 > candidato1){
+            contParrafo.innerHTML += "los candidatos 2 y 3 tienen el mismo numero de votos"
+        }
+        contParrafo.innerHTML += "<br>Total de votos: "+cont
+        final()
+    }
+    contEncabezado.append(contParrafo)
+    
 }
 
 function quitarBotones(){
