@@ -65,7 +65,6 @@ document.getElementById("btn1").onclick = function(){
                                 const contTblTr = document.createElement("tr");
                                 for(var j = 0; j < 2; j++){
                                     const contTbltd = document.createElement("td")
-                                    console.log('La clave es: ' + clave + ' y el valor es ' + valor)
                                     contTbltd.textContent = (j == 0 ? clave:valor)
                                     contTblTr.append(contTbltd)
                                 }
@@ -303,7 +302,6 @@ document.getElementById("btn4").onclick = function(){
         contParrafo.innerHTML = "El promedio de mujeres es: " + (edad_mujeres/cont)
         +"<br>El promedio de hombres es: " + (edad_hombres/cont)
         +"<br>El promedio general es: " + (promedio_general/(cont*2))
-        console.log((cont*2))
         contEncabezado.append(contParrafo)
 
         contInputM.style.display = "none"
@@ -387,7 +385,6 @@ document.getElementById("btn6").onclick = function(){
 
     document.getElementById("btnEnviar").onclick = function(){
         if(contPersonas < 5){
-            console.log("a")
             contPeso = 0
             contTitle.textContent = "Ingrese el peso anterior de la persona #"+(contPersonas+1)
             peso_anterior[contPersonas] = parseInt(contInput.value)
@@ -405,7 +402,6 @@ document.getElementById("btn6").onclick = function(){
             DifPeso[contPersonas-1] = (contPeso <= 0 ) ? (parseInt(contInput.value) - (peso_anterior[contPersonas-1])) : DifPeso[contPersonas-1] 
                                         + (parseInt(contInput.value) - (peso_anterior[contPersonas-1]))
             contPeso++
-            console.log(DifPeso)
             if(contPeso > 9){
                 contBtnNPeso.style.display = "none"
                 contBtn.style.display = "inline"
@@ -424,7 +420,6 @@ document.getElementById("btn6").onclick = function(){
                         }
                     }
                     contEncabezado.append(contParrafo)
-                    console.log(DifPeso)
                     final()
                 }
                 
@@ -714,8 +709,6 @@ document.getElementById("btn11").onclick = function(){
                 sumatoria += i
                 productoria *= i
                 promedio = (sumatoria/tam)
-                console.log("primo: "+i)
-                console.log("tam :"+tam)
             }
         }
         contParrafo.innerHTML = "La sumatoria es: "+sumatoria
@@ -753,9 +746,7 @@ document.getElementById("btn12").onclick = function(){
     contBtn.onclick = function(){
         num = contInput.value
         cont++
-        console.log("a "+num.length)
         for (let i=0;i<=num.length-1;i++) {
-            console.log(num.charAt(i))
             sumatoria += parseInt(num.charAt(i))
             productoria *= parseInt(num.charAt(i))
             promedio = sumatoria/num.length
