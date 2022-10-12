@@ -869,6 +869,31 @@ document.getElementById("btn14").onclick = function(){
     }
 }
 
+document.getElementById("btn15").onclick = function(){
+    var a = 25, b = 19.9, cont = 0
+    contTitle.textContent = "Presione el boton para iniciar"
+
+    quitarBotones()
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnIniciar"
+    contBtn.textContent = "Iniciar"
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contBtn)
+
+    contBtn.onclick = function(){
+        while(a>b){
+            a += (a*0.02)
+            b += (b*0.03)
+            cont++
+        }
+        contParrafo.innerHTML = "La poblacion del pais B superara a la del pais A en el año: "+(1994+cont)
+        contEncabezado.append(contParrafo)
+        final()
+    }
+}
+
 function quitarBotones(){
     for(var i = 0; i<15; i++){
         document.getElementsByClassName("btn")[i].style.display = "none"
