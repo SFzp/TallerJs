@@ -2,6 +2,8 @@ const contEncabezado = document.querySelector(".encabezado")
 const contBtn = document.createElement("div")
 const contInput = document.createElement("input")
 const contTitle = document.createElement("H2")
+const contBtnCal = document.createElement("div")
+const contParrafo = document.createElement("p")
 
 document.getElementById("btn1").onclick = function(){
     const contTbl = document.createElement('table')
@@ -154,7 +156,6 @@ document.getElementById("btn2").onclick = function(){
 
     document.getElementById("btnEnviar").onclick = function(){
         let animal = document.querySelector('input[name="animal"]:checked').value
-        const contParrafo = document.createElement("p")
         contEncabezado.style.padding = "0"
         contBtn.style.display = "block"
         switch(animal){
@@ -219,7 +220,6 @@ document.getElementById("btn2").onclick = function(){
 document.getElementById("btn3").onclick = function(){
     var horasTrabajadas, total, horasExtra
 
-    const contParrafo = document.createElement("p")
     contTitle.textContent = "Ingrese el número de horas trabajadas"
     contInput.className = "horasTrabajadas"
     contInput.id = "horasTrabajadas"
@@ -254,7 +254,6 @@ document.getElementById("btn3").onclick = function(){
 document.getElementById("btn4").onclick = function(){
     var hombres = [], mujeres = [], cont = 0
     const contInputM = document.createElement("input")
-    const contBtnCal = document.createElement("div")
     contTitle.textContent = "Ingrese la edad del hombre y la mujer 1"
     contInput.className = "NHombres"
     contInput.id = "NHombres"
@@ -293,7 +292,6 @@ document.getElementById("btn4").onclick = function(){
         cont++
     }
 
-    const contParrafo = document.createElement("p")
     document.getElementById("btnCalcular").onclick = function(){
         var edad_mujeres = 0, edad_hombres = 0, promedio_general = 0
         for(var i = 0; i < cont;i++){
@@ -340,8 +338,6 @@ document.getElementById("btn5").onclick = function(){
 
     contBtnNumMenor.style.display = "block"
 
-    const contParrafo = document.createElement("p")
-
     document.getElementById("btnEnviar").onclick = function(){
         contTitle.textContent = "Ingrese un numero - #"+(cont+2)
         num[cont] = parseInt(contInput.value)
@@ -368,7 +364,6 @@ document.getElementById("btn5").onclick = function(){
 document.getElementById("btn6").onclick = function(){
     var peso_anterior = [], suma = [], contPersonas = 0, contPeso = 0, DifPeso = []
     const contBtnNPeso = document.createElement("div")
-    const contParrafo = document.createElement("p")
     contTitle.textContent = "Ingrese el peso anterior de la persona #"+1
     contInput.className = "Peso"
     contInput.id = "Peso"
@@ -441,8 +436,6 @@ document.getElementById("btn6").onclick = function(){
 
 document.getElementById("btn7").onclick = function(){
     var contArticulos = 0, precioArticulo, total = 0
-    const contBtnCal = document.createElement("div")
-    const contParrafo = document.createElement("p")
     contTitle.textContent = "Ingrese el articulo #"+1
     contInput.className = "Articulo"
     contInput.id = "Articulo"
@@ -480,8 +473,6 @@ document.getElementById("btn7").onclick = function(){
 }
 
 document.getElementById("btn8").onclick = function(){
-    const contBtnCal = document.createElement("div")
-    const contParrafo = document.createElement("p")
     const contInputPF = document.createElement("input")
     var descuento, descuentoCategoria1 = 0, descuentoCategoria2 = 0, descuentoCategoria3 = 0,
     descuentoCategoria4 = 0, descuentoCategoria5 = 0, edad = [], precio = [], cont = 0
@@ -566,7 +557,6 @@ document.getElementById("btn8").onclick = function(){
 
 document.getElementById("btn9").onclick = function(){
     var cont = 0, ventas, comision
-    const contParrafo = document.createElement("p")
     contTitle.textContent = "Ingrese cuando vendio el vendedor #"+1
     contInput.className = "Vendio"
     contInput.id = "Vendio"
@@ -618,7 +608,6 @@ document.getElementById("btn9").onclick = function(){
 }
 
 document.getElementById("btn10").onclick = function(){
-    const contParrafo = document.createElement("p")
     var candidato1 = 0, candidato2 = 0, candidato3 = 0, cont = 0
     contTitle.textContent = "Presione el boton para iniciar el conteo de votos"
 
@@ -699,7 +688,6 @@ document.getElementById("btn10").onclick = function(){
 }
 
 document.getElementById("btn11").onclick = function(){
-    const contParrafo = document.createElement("p")
     var sumatoria, promedio, productoria = 0, num, tam = 0
     contTitle.textContent = "Ingrese hasta que numero quiere llegar"
     contInput.className = "Num"
@@ -743,6 +731,98 @@ document.getElementById("btn11").onclick = function(){
         return numero > 1
     }
     contEncabezado.append(contParrafo)
+}
+
+document.getElementById("btn12").onclick = function(){
+    var sumatoria = 0, promedio = 0, productoria = 1, num = [], cont = 0
+    contTitle.textContent = "Ingrese un numero entero - #1"
+    contInput.className = "Num"
+    contInput.id = "Num"
+    contInput.required = "true"
+
+    quitarBotones()
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnEnviar"
+    contBtn.textContent = "Enviar"
+
+    contBtnCal.className = "btn btn-primary"
+    contBtnCal.id = "btnCalcular"
+    contBtnCal.textContent = "Calcular"
+    contBtnCal.style.display = "block"
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contBtn)
+    contEncabezado.append(contBtnCal)
+
+    contBtn.onclick = function(){
+        num[cont] = parseInt(contInput.value)
+        cont++
+        contTitle.textContent = "Ingrese un numero entero - #"+(cont+1)
+        console.log(num)
+    }
+
+    contBtnCal.onclick = function(){
+        for (let i=0;i<=num.length-1;i++) {
+            console.log(num[i])
+            sumatoria += num[i]
+            productoria *= num[i]
+            promedio = (sumatoria/num.length)
+        }
+        console.log(sumatoria)
+        contParrafo.innerHTML = "La sumatoria es: "+sumatoria
+        contParrafo.innerHTML += "<br>La productoria es: "+productoria
+        contParrafo.innerHTML += "<br>El promedio es: "+promedio
+        contEncabezado.append(contParrafo)
+        contBtnCal.style.display = "none"
+        final()
+    }
+}
+
+document.getElementById("btn13").onclick = function(){
+    var limit, par = 0, impar = 0, ceros = 0
+    contTitle.textContent = "Ingrese cuantos elementos desea de la serie de fibonacc"
+    contInput.className = "Num"
+    contInput.id = "Num"
+    contInput.required = "true"
+
+    quitarBotones()
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnIniciar"
+    contBtn.textContent = "Iniciar"
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contBtn)
+
+    contBtn.onclick = function(){
+        limit = parseInt(contInput.value)
+
+        const fib = [0,1]
+        for(let i = 2; i < limit; i++){
+            fib[i] = fib[i-1] + fib[i-2]
+        }
+
+        for(let i = 0; i < fib.length;i++){
+            if(fib[i] % 2 == 0){
+                par++
+                if(fib[i] == 0){
+                    ceros++
+                }
+            }
+            else{
+                impar++
+            }
+        }
+
+        contParrafo.innerHTML = par+" son par<br>"
+        contParrafo.innerHTML += impar+" son impar<br>"
+        contParrafo.innerHTML += ceros+" son cero"
+        contEncabezado.append(contParrafo)
+        final()
+    }
 }
 
 function quitarBotones(){
