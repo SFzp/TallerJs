@@ -655,38 +655,52 @@ document.getElementById("btn10").onclick = function(){
         contParrafo.innerHTML += "El candidato 2 tiene un total de votos de: "+candidato2+"<br>"
         contParrafo.innerHTML += "El candidato 3 tiene un total de votos de: "+candidato3+"<br>"
     
-        if(candidato1 > candidato2){
-            if(candidato1 > candidato3){
-                contParrafo.innerHTML += "El candidatos 1 tiene mas votos"
-            }
-            else{
-                contParrafo.innerHTML += "El candidatos 3 tiene mas votos"
-            }
-        }
-        else if(candidato2 > candidato3){
-            contParrafo.innerHTML += "El candidatos 2 tiene mas votos"
-        }
-        else{
-            contParrafo.innerHTML += "El candidatos 3 tiene mas votos"
-        }
-    
+            
         if(candidato1 == candidato2 && candidato1 == candidato3 && candidato2 == candidato3){
             contParrafo.innerHTML += "los 3 candidatos tienen el mismo numero de votos"
         }
-        else if(candidato1 == candidato2 && candidato1 == candidato3 && candidato2 > candidato3){
-            contParrafo.innerHTML += "los candidatos 1 y 2 tienen el mismo numero de votos"
-        }
-        else if(candidato1 == candidato3 && candidato2 > candidato3){
-            contParrafo.innerHTML += "los candidatos 1 y 3 tienen el mismo numero de votos"
-        }
-        else if(candidato2 == candidato3 && candidato2 > candidato1){
-            contParrafo.innerHTML += "los candidatos 2 y 3 tienen el mismo numero de votos"
+        else{
+            if(candidato1 == candidato2){
+                contParrafo.innerHTML += "los candidatos 1 y 2 tienen el mismo numero de votos"
+            }
+            else{
+                if(candidato1 == candidato3){
+                    contParrafo.innerHTML += "los candidatos 1 y 3 tienen el mismo numero de votos"
+                }
+                else{
+                    if(candidato2 == candidato3){
+                        contParrafo.innerHTML += "los candidatos 2 y 3 tienen el mismo numero de votos"
+                    }
+                    else{
+                        if(candidato1 > candidato2){
+                            if(candidato1 > candidato3){
+                                contParrafo.innerHTML += "El candidatos 1 tiene mas votos"
+                            }
+                            else{
+                                contParrafo.innerHTML += "El candidatos 3 tiene mas votos"
+                            }
+                        }
+                        else{
+                            if(candidato2 > candidato3){
+                                contParrafo.innerHTML += "El candidatos 2 tiene mas votos"
+                            }
+                            else{
+                                contParrafo.innerHTML += "El candidatos 3 tiene mas votos"
+                            }
+                        }
+                    }
+                }
+            }
         }
         contParrafo.innerHTML += "<br>Total de votos: "+cont
         final()
     }
     contEncabezado.append(contParrafo)
     
+}
+
+document.getElementById("btn11").onclick = function(){
+
 }
 
 function quitarBotones(){
