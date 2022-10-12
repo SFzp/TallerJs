@@ -825,6 +825,50 @@ document.getElementById("btn13").onclick = function(){
     }
 }
 
+document.getElementById("btn14").onclick = function(){
+    var num1, num2
+    contTitle.textContent = "Ingrese los numeros para obtener el MCD"
+    const contInput2 = document.createElement("input")
+
+    contInput.className = "Num"
+    contInput.id = "Num"
+    contInput.required = "true"
+    contInput.placeholder = "Numero 1"
+
+    contInput2.className = "Num2"
+    contInput2.id = "Num2"
+    contInput2.required = "true"
+    contInput2.placeholder = "Numero 2"
+
+    quitarBotones()
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnIniciar"
+    contBtn.textContent = "Iniciar"
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contInput2)
+    contEncabezado.append(contBtn)
+
+    contBtn.onclick = function(){
+        num1 = contInput.value
+        num2 = contInput2.value
+
+        let aux
+        while(num2){
+            aux = num2
+            num2 = num1 % num2
+            num1 = aux
+        }
+
+        contParrafo.innerHTML = "El MCD es: "+num1
+        contEncabezado.append(contParrafo)
+        contInput2.style.display = "none"
+        final()
+    }
+}
+
 function quitarBotones(){
     for(var i = 0; i<15; i++){
         document.getElementsByClassName("btn")[i].style.display = "none"
