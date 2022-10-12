@@ -734,8 +734,8 @@ document.getElementById("btn11").onclick = function(){
 }
 
 document.getElementById("btn12").onclick = function(){
-    var sumatoria = 0, promedio = 0, productoria = 1, num = [], cont = 0
-    contTitle.textContent = "Ingrese un numero entero - #1"
+    var sumatoria = 0, promedio, productoria = 1, num, cont = 0, par = 0, impar = 0
+    contTitle.textContent = "Ingrese un numero entero"
     contInput.className = "Num"
     contInput.id = "Num"
     contInput.required = "true"
@@ -746,34 +746,31 @@ document.getElementById("btn12").onclick = function(){
     contBtn.id = "btnEnviar"
     contBtn.textContent = "Enviar"
 
-    contBtnCal.className = "btn btn-primary"
-    contBtnCal.id = "btnCalcular"
-    contBtnCal.textContent = "Calcular"
-    contBtnCal.style.display = "block"
-
     contEncabezado.append(contTitle)
     contEncabezado.append(contInput)
     contEncabezado.append(contBtn)
-    contEncabezado.append(contBtnCal)
 
     contBtn.onclick = function(){
-        num[cont] = parseInt(contInput.value)
+        num = contInput.value
         cont++
-        contTitle.textContent = "Ingrese un numero entero - #"+(cont+1)
-        console.log(num)
-    }
-
-    contBtnCal.onclick = function(){
+        console.log("a "+num.length)
         for (let i=0;i<=num.length-1;i++) {
-            console.log(num[i])
-            sumatoria += num[i]
-            productoria *= num[i]
-            promedio = (sumatoria/num.length)
+            console.log(num.charAt(i))
+            sumatoria += parseInt(num.charAt(i))
+            productoria *= parseInt(num.charAt(i))
+            promedio = sumatoria/num.length
+            if(parseInt(num.charAt(i)) % 2 == 0){
+                par++
+            }
+            else{
+                impar++
+            }
         }
-        console.log(sumatoria)
         contParrafo.innerHTML = "La sumatoria es: "+sumatoria
         contParrafo.innerHTML += "<br>La productoria es: "+productoria
         contParrafo.innerHTML += "<br>El promedio es: "+promedio
+        contParrafo.innerHTML += "<br>Hay "+par+" par"
+        contParrafo.innerHTML += "<br>Hay "+impar+" impar"
         contEncabezado.append(contParrafo)
         contBtnCal.style.display = "none"
         final()
