@@ -88,25 +88,24 @@ document.getElementById("btn1").onclick = function(){
             alert("Ingrese un caracter valido o mayor a 0")
         }
     }
-}
-
-function colorCalcomania(caracter){
-    switch(caracter){
-        case "1": case "2":
-            return "Amarilla"
-
-        case "3": case "4":
-            return "Rosa"
-
-        case "5": case "6":
-            return "Roja"
-
-        case "7": case "8":
-            return "Verde"
-
-        case "9": case "0":
-            return "Azul"
-    }    
+    function colorCalcomania(caracter){
+        switch(caracter){
+            case "1": case "2":
+                return "Amarilla"
+    
+            case "3": case "4":
+                return "Rosa"
+    
+            case "5": case "6":
+                return "Roja"
+    
+            case "7": case "8":
+                return "Verde"
+    
+            case "9": case "0":
+                return "Azul"
+        }    
+    }
 }
 
 document.getElementById("btn2").onclick = function(){
@@ -700,7 +699,50 @@ document.getElementById("btn10").onclick = function(){
 }
 
 document.getElementById("btn11").onclick = function(){
+    const contParrafo = document.createElement("p")
+    var sumatoria, promedio, productoria = 0, num, tam = 0
+    contTitle.textContent = "Ingrese hasta que numero quiere llegar"
+    contInput.className = "Num"
+    contInput.id = "Num"
+    contInput.required = "true"
 
+    quitarBotones()
+
+    contBtn.className = "btn btn-success"
+    contBtn.id = "btnIniciar"
+    contBtn.textContent = "Iniciar"
+
+    contEncabezado.append(contTitle)
+    contEncabezado.append(contInput)
+    contEncabezado.append(contBtn)    
+
+    contBtn.onclick = function(){
+        num = contInput.value
+        sumatoria = 0
+        productoria = 1
+        for (let i=0;i<=num;i++) {
+            if (esPrimo(i)){
+                tam++
+                sumatoria += i
+                productoria *= i
+                promedio = (sumatoria/tam)
+                console.log("primo: "+i)
+                console.log("tam :"+tam)
+            }
+        }
+        contParrafo.innerHTML = "La sumatoria es: "+sumatoria
+        contParrafo.innerHTML += "<br>La productoria es: "+productoria
+        contParrafo.innerHTML += "<br>El promedio es: "+promedio
+        final()
+    }
+
+    function esPrimo(numero) {    
+        for(let i = 2,raiz=Math.sqrt(numero); i <= raiz; i++){
+            if(numero % i === 0) return false
+        }
+        return numero > 1
+    }
+    contEncabezado.append(contParrafo)
 }
 
 function quitarBotones(){
